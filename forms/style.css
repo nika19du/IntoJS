@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Oxygen' );
+body{
+    background:#957054;
+    font-family: Oxygen,sans-serif;
+}
+
+.image-container{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.image-container >img{
+    height: 123px;
+    border: 5px solid #d5c395;
+    margin-bottom: 30px;
+}
+
+form{
+    background: #d5c395;
+    width:500px;/*ako ima mqsto 500px*/
+    margin:0 auto;
+    position: relative;
+    padding-top: 40px;
+    max-width: 90%; /*ako nqma mqsto 100%, obache i poletata tr da sa v %*/
+    box-sizing: border-box;
+}
+
+form::before{
+    content: '';
+    background:url(img/triangle.png);
+    width:68px;
+    height: 35px;
+    position: absolute;
+    top:-30px;
+    left:calc(50%-34px); /* calc(50%-34px); 218px; */
+}
+.form-filed{
+    width:100%;
+    margin:0 auto;
+    position: relative;
+}
+input[type='text'], input[type='password']{
+    width:calc(100%-10px);
+    background:#efe1c4;
+    padding:10px 10px 10px 60px;
+    border-radius: 10px;
+    border:none;
+    outline:  none;
+    box-sizing: border-box;
+    color: #927057;
+margin: 5px Opx;
+display: block;
+}
+ 
+.form-filed>image{
+    position:absolute;
+    left:20px;
+    top:12px;
+}
+
+.submit {
+    outline: none;
+    border: none;
+    width: calc(100% - 10px);
+    padding: 10px;
+    background: #927057;
+    color: #d5c395;
+    font-size: 1.5em;
+    font-weight: 900;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.submit:hover{
+    color: #f3e0aa;
+    box-shadow:0px 0px 13px white; /*box-shadow ne izmestva za razlika ot border*/
+}

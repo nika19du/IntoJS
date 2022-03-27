@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="site.css">
+    <link rel="stylesheet" href="order.css">
+    <title>Order|Bethany's Pie shop</title> 
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="pies.html">Pies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <img src="images/logo.png" alt="Bethany's Pie shop">
+        </aside>
+        <article>
+            <h1>Order</h1>
+            <div class="pie">
+                <img src="">
+                <div class="columns">
+                    <div class="title"></div>
+                     <div class="price"></div>
+                </div>
+                <p class="desc"></p>
+             </div>
+
+            <form action="http://127.0.0.1:5500/api/post" method="POST">
+
+                <input type="hidden" id="location" name="location" >
+                <div class="input-group">
+                    <div>
+                        <label for="first-name">First name</label><!--for=""ima sujoto ime kat na input i kat go klicknesh redirectva kum inputa s tva for:ime-->
+                    </div>
+                    <div>
+                        <input type="text" name="first-name" id="first-name">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div>
+                        <label for="last-name">Last name</label>
+                    </div>
+                    <div>
+                        <input type="text" name="last-name" id="last-name">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div>
+                        <label for="address">Address</label>
+                    </div>
+                    <div>
+                        <input type="text" name="address" id="address">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div><label for="city">Choose City</label></div>
+
+                    <div>
+                        <select name="city" id="city">
+                            <option value="Sofia">Sofia</option>
+                            <option value="Plovdiv">Plovdiv</option>
+                            <option value="Burgas">Burgas</option>
+                            <option value="Varna">Varna</option>
+                            <option value="Ruse">Ruse</option>
+                            <option value="Kazanlak">Kazanlak</option>
+                            <option value="Hissarya">Hissarya</option>
+                            <option value="Pernik">Pernik</option>
+                            <option value="Gabrovo">Gabrovo</option>
+                            <option value="Montana">Montana</option>
+                            <option value="Blagoevgrad">Blagoevgrad</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div>
+                        <label for="postal-code">Postal code</label>
+                    </div>
+                    <div>
+                        <input type="text" name="postal-code" id="postal-code">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div>
+                        <label for="comments">Comments</label>
+                    </div>
+                    <div>
+                        <textarea 
+                        name="comments" 
+                        id="comments"
+                         cols="30" rows="10"></textarea>
+                    </div>
+                </div>
+
+                <input type="reset" value="Rest">
+                <input type="submit" value="Order">
+            </form>
+        </article>
+    </main>
+    <footer>
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="pies.html">Pies</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </footer>
+
+
+</body>
+
+<script>
+    window.addEventListener('DOMContentLoaded',function(e){
+
+        let locationBox=document.querySelector('#location');
+        let location={
+            latitude:"unknown",
+            longtitude:"unknown"
+        };
+
+        window.navigator.geolocation.getCurrentPosition(
+            function(position){//this is provided only if user hase chosen to allow their location to be shared with the application
+                location={
+                    latitude:position.coords.latitude,
+                    longtitude:position.coords.longtitude
+                };
+                locationBox.value=JSON.stringify(location);
+            },
+            function(error){//when they deny
+                locationBox.value=JSON.stringify(location);
+            }
+        );
+
+        const order=localStorage.getItem('order');
+
+        if(order){
+            const pieOrder=JSON.parse(order);
+
+            const pie=document.querySelector('.pie');
+
+            const title=pie.querySelector('.title');
+            const price=pie.querySelector('.price');
+            const desc=pie.querySelector('.desc');
+           
+            title.innerHTML=pieOrder.title;
+            price.innerHTML=pieOrder.price;
+            desc.innerHTML=pieOrder.desc;
+            
+            const img=pie.querySelector('img');
+            img.setAttribute('src',`images/${pieOrder.id}.png`);
+
+            img.setAttribute('alt',pieOrder.title);
+        }
+
+
+    });
+</script>
+
+</html>
